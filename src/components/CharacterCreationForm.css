@@ -1,0 +1,17 @@
+.form-container {
+    background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px; /* Optional: if you want rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: to add a subtle shadow for more depth */
+    margin: auto; /* Center the form container if it's not full width */
+    width: 80%; /* Adjust the width as necessary */
+  }
+  
+  /* If you have a max-width for the form or responsive design, you can add media queries */
+  @media (max-width: 600px) {
+    .form-container {
+      width: 95%;
+      padding: 10px;
+    }
+  }
+  
