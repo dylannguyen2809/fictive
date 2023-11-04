@@ -11,7 +11,12 @@ const formContainerStyle = {
     width: '80%',
     // Add other styles as needed
   };
-
+  const inputStyle = {
+    color: 'white', // This sets the text color to white
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // This sets a semi-transparent black background to the inputs
+    borderColor: 'white', // Optional: if you want to change the border color to white
+    // ... other styles
+  };
 
   
   
@@ -55,6 +60,12 @@ const CharacterCreationForm = ({ handleSubmit }) => {
     <div style={formContainerStyle}>{
     <form onSubmit={handleFormSubmission}>
       <TextField
+        InputProps={{
+            style: { color: 'white' }, // This changes the input text color
+        }}
+        InputLabelProps={{
+            style: { color: 'white' } // This changes the label color
+        }}
         autoFocus
         margin="dense"
         id="kid-name"
@@ -64,9 +75,10 @@ const CharacterCreationForm = ({ handleSubmit }) => {
         variant="outlined"
         value={name}  // Bind value to state
         onChange={handleNameChange}  // Set onChange handler
-    />
+        />
 
       <FormControl fullWidth margin="dense">
+       
         <InputLabel id="kid-gender-label">Character's Gender</InputLabel>
         <Select
             labelId="kid-gender-label"
@@ -75,6 +87,10 @@ const CharacterCreationForm = ({ handleSubmit }) => {
             value={gender}  // Bind value to state
             onChange={handleGenderChange}  // Set onChange handler
             defaultValue=""
+            style={{ color: 'white' }} // Set text color of the select
+            inputProps={{
+            style: { color: 'white' } // Set text color of the select input
+            }}
         >
           <MenuItem value=""><em>None</em></MenuItem>
           <MenuItem value={'male'}>Male</MenuItem>
@@ -84,6 +100,13 @@ const CharacterCreationForm = ({ handleSubmit }) => {
       </FormControl>
 
       <TextField
+        InputProps={{
+            style: { color: 'white' }, // This changes the input text color
+        }}
+        InputLabelProps={{
+            style: { color: 'white' } // This changes the label color
+        }}
+        autoFocus
         margin="dense"
         id="kid-character"
         label="Character's race (optional)"
@@ -93,12 +116,24 @@ const CharacterCreationForm = ({ handleSubmit }) => {
       />
 
       <FormControl fullWidth margin="dense">
-        <InputLabel id="story-language-label">Story language</InputLabel>
+        <InputLabel id="story-language-label" style={{ color: 'white' }}>Story language</InputLabel>
         <Select
           labelId="story-language-label"
           id="story-language"
           label="Story language"
           defaultValue=""
+          style={{ color: 'white' }} // Set text color of the select
+        inputProps={{
+        style: { color: 'white' } // Set text color of the select input
+        }}
+        MenuProps={{
+        PaperProps: {
+            style: {
+            backgroundColor: 'darkgrey', // You can choose a dark background or any other preferred color
+            color: 'white', // Set text color of the dropdown options
+            },
+        },
+        }}
         >
           <MenuItem value=""><em>None</em></MenuItem>
           {/* Populate with languages */}
@@ -109,23 +144,42 @@ const CharacterCreationForm = ({ handleSubmit }) => {
       </FormControl>
 
       <FormControl fullWidth margin="dense">
-        <InputLabel id="story-theme-label">Story theme</InputLabel>
+        <InputLabel id="story-theme-label" style={{ color: 'white' }}>Story theme</InputLabel>
         <Select
-          labelId="story-theme-label"
-          id="story-theme"
-          label="Story theme"
-          defaultValue=""
+            labelId="story-theme-label"
+            id="story-theme"
+            label="Story theme"
+            defaultValue=""
+            style={{ color: 'white' }} // Set text color of the select
+            inputProps={{
+            style: { color: 'white' } // Set text color of the select input
+            }}
+            MenuProps={{
+            PaperProps: {
+                style: {
+                backgroundColor: 'darkgrey', // You can choose a dark background or any other preferred color
+                color: 'white', // Set text color of the dropdown options
+                },
+            },
+            }}
         >
-          <MenuItem value=""><em>None</em></MenuItem>
-          {/* Populate with themes */}
-          <MenuItem value={'adventure'}>Adventure</MenuItem>
-          <MenuItem value={'fantasy'}>Fantasy</MenuItem>
-          <MenuItem value={'sci-fi'}>Science Fiction</MenuItem>
-          {/* ... other themes */}
+            <MenuItem value="" style={{ color: 'white' }}><em>None</em></MenuItem>
+            {/* Populate with themes */}
+            <MenuItem value={'adventure'} style={{ color: 'white' }}>Adventure</MenuItem>
+            <MenuItem value={'fantasy'} style={{ color: 'white' }}>Fantasy</MenuItem>
+            <MenuItem value={'sci-fi'} style={{ color: 'white' }}>Science Fiction</MenuItem>
+            {/* ... other themes */}
         </Select>
-      </FormControl>
+        </FormControl>
 
       <TextField
+        InputProps={{
+            style: { color: 'white' }, // This changes the input text color
+        }}
+        InputLabelProps={{
+            style: { color: 'white' } // This changes the label color
+        }}
+        autoFocus
         margin="dense"
         id="story-purpose"
         label="Story purpose (optional)"
