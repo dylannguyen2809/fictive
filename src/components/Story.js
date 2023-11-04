@@ -11,6 +11,35 @@ function Story() {
     const [chapterContent, setChapterContent] = useState("One sunny afternoon, while he was exploring the attic of his grandmother's house, he stumbled upon an old, dusty book. As he opened it, a strange symbol caught his eye. Before he could react, the symbol glowed brightly and a shimmering portal appeared in front of him.");
     const [choice1, setChoice1] = useState("Step through the portal and explore the unknown.");
     const [choice2, setChoice2] = useState("Open the book to discover its secrets");
+    const [selectedChoice, setSelectedChoice] = useState("Step through the portal and explore the unknown.");
+    const [currentChapter, setCurrentChapter] = useState(false);
+
+    const [chapters, setChapters] = useState([
+      {
+        chapterName: "Chapter 1: A New Discovery",
+        chapterContent: "One sunny afternoon, while he was exploring the attic of his grandmother's house, he stumbled upon an old, dusty book. As he opened it, a strange symbol caught his eye. Before he could react, the symbol glowed brightly and a shimmering portal appeared in front of him.",
+        choice1: "Step through the portal and explore the unknown.",
+        choice2: "Open the book to discover its secrets",
+        selectedChoice: "Step through the portal and explore the unknown.",
+        currentChapter: false,
+      },
+      {
+        chapterName: "Chapter 2: The Enchanted Forest",
+        chapterContent: "With curiosity and excitement, Dylan decided to step through the portal. As he crossed the threshold, he found himself in a lush, enchanted forest. The trees were colossal, and the air was filled with the sweet scent of exotic flowers. Strange creatures flitted about, and everything seemed to glisten with magic.",
+        choice1: "Approach the nearest creature to try and communicate with it.",
+        choice2: "Wander deeper into the forest to discover its secrets.",
+        selectedChoice: "Wander deeper into the forest to discover its secrets.",
+        currentChapter: false,
+      },
+      {
+        chapterName: "Chapter 3: The Secret Grove",
+        chapterContent: "As Dylan wandered deeper into the forest, he encountered even more enchanting sights. He stumbled upon a hidden grove, bathed in the soft glow of bioluminescent plants. In the center of the grove, a magnificent ancient tree stood, its bark adorned with intricate carvings and symbols.",
+        choice1: "Approach the ancient tree and examine its carvings.",
+        choice2: "Explore the surrounding area to see if there are any other hidden secrets in the grove.",
+        selectedChoice: null,
+        currentChapter: true,
+      },
+    ]);
 
     const theme = createTheme({
         palette: {
@@ -54,6 +83,17 @@ function Story() {
           });
       }, []);
   
+    const chapterArr = chapters.map((data) => 
+    <Chapter 
+      chapterName={data.chapterName}
+      chapterContent={data.chapterContent}
+      choice1={data.choice1}
+      choice2={data.choice2}
+      currentChapter={data.currentChapter}
+      selectedChoice={data.selectedChoice}
+    />);
+
+
     return (
       <div className="Story">
         <ThemeProvider theme={theme}>
@@ -73,12 +113,7 @@ function Story() {
                     width: '100%',
                 }}
                 >
-                <Chapter 
-                    chapterName={chapterName}
-                    chapterContent={chapterContent}
-                    choice1={choice1}
-                    choice2={choice2}
-                />
+                  {chapterArr}
                 <p>The current time is {currentTime}.</p>
             </Box>
         </ThemeProvider>
