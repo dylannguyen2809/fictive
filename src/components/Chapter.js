@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Card, CardContent, Typography, Button, Container, TextField, Box } from '@mui/material';
 import { createTheme } from '@mui/material/styles'; // Import createTheme
+import Typed from 'react-typed';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: '20px',
+    width: '90%',
   },
   imageContainer: {
     position: 'relative',
@@ -27,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
   chapterText: {
     position: 'absolute',
     top: '5%', // Vertically center the text
-    left: '-30%', // Horizontally center the text
-    //transform: 'translate(-50%, -50%)',
     color: 'white',
     padding: theme.spacing(1),
     textAlign: 'center',
@@ -93,6 +93,21 @@ const useStyles = makeStyles((theme) => ({
     padding: '0px',
     backgroundColor: theme.palette.secondary.main, // Use secondary theme color
   },
+  choiceText: {
+    position: 'absolute',
+    top: '5%', // Vertically center the text
+    left: '-30%', // Horizontally center the text
+    color: 'white',
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    width: '95%',
+  },
+  selectedChoiceText: {
+    color: 'white',
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    width: '100%',
+  },
 }));
 
 function Chapter(props) {
@@ -108,47 +123,58 @@ function Chapter(props) {
         />
         <div className={classes.chapterText}><Typography variant="h4">{props.chapterName}</Typography></div>
         <div className={classes.imageText}>
-          <Typography variant="h6">{props.chapterContent}</Typography>
+          <Typography variant="h6">
+            <Typed
+                strings={[props.chapterContent]}
+                typeSpeed={40}
+            />
+          </Typography>
         </div>
       </div>
-
-      <div className={classes.buttonContainer}>
-        <Button
-          variant="contained"
-          className={`${classes.squareButton} ${classes.button1}`}
-        >
+      {!props.currentChapter && //OLD CHAPTER
+      <>
+        <div>
+          <Typography variant="h4" className={classes.selectedChoiceText}>
+          You selected: {props.selectedChoice}
+          </Typography>
+        </div>
+      </>}
+      {props.currentChapter && //CURRENT CHAPTER
+        <><div className={classes.buttonContainer}>
+          <Button
+            variant="contained"
+            className={`${classes.squareButton} ${classes.button1}`}
+          >
             <Typography variant="h5">{props.choice1}</Typography>
-        </Button>
-        <Button
-          variant="contained"
-          className={`${classes.squareButton} ${classes.button2}`}
-        >
+          </Button>
+          <Button
+            variant="contained"
+            className={`${classes.squareButton} ${classes.button2}`}
+          >
             <Typography variant="h5">{props.choice2}</Typography>
-        </Button>
-      </div>
-
-      <Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
-        <Card className={classes.cardBackground}>
-          <CardContent className={classes.cardBackground}>
-            <Typography variant="h6" gutterBottom>
-              🪶 MAKE YOUR OWN CHOICE!
-            </Typography>
-            <Box display="flex">
-              <TextField
-                className={classes.textField}
-                label="Input Text"
-                variant="outlined"
-              />
-              <Button
-                variant="contained"
-                className={classes.submitButton}
-              >
-                CONTINUE...
-              </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Container>
+          </Button>
+        </div><Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
+            <Card className={classes.cardBackground}>
+              <CardContent className={classes.cardBackground}>
+                <Typography variant="h6" gutterBottom>
+                  🪶 MAKE YOUR OWN CHOICE!
+                </Typography>
+                <Box display="flex">
+                  <TextField
+                    className={classes.textField}
+                    label="Input Text"
+                    variant="outlined" />
+                  <Button
+                    variant="contained"
+                    className={classes.submitButton}
+                  >
+                    CONTINUE...
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Container></>
+      }
     </div>
   );
 }
