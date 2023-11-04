@@ -2,20 +2,10 @@ import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './Header';
 import Box from '@mui/material/Box';
-import Chapter from './Chapter';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+
 import Form from './CharacterCreationForm';
 
 function CharacterCreation() {
-    const [currentTime, setCurrentTime] = useState('');
-    const [chapterName, setChapterName] = useState('Chapter 1: A New Discovery');
-    const [chapterContent, setChapterContent] = useState("One sunny afternoon, while he was exploring the attic of his grandmother's house, he stumbled upon an old, dusty book. As he opened it, a strange symbol caught his eye. Before he could react, the symbol glowed brightly and a shimmering portal appeared in front of him.");
-    const [choice1, setChoice1] = useState("Step through the portal and explore the unknown.");
-    const [choice2, setChoice2] = useState("Open the book to discover its secrets");
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
@@ -26,12 +16,10 @@ function CharacterCreation() {
     setOpen(false);
     };
 
-    const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle the form submission here
-    // extract the values from the form fields
-    // and do something with them
-    handleClose();
+
+    const handleSubmit = (formData) => {
+        console.log('Form Data:', formData);
+        handleClose();
     };
 
     const theme = createTheme({
@@ -78,7 +66,7 @@ function CharacterCreation() {
                 >
                
 
-                <Form></Form>
+               <Form handleSubmit={handleSubmit} />
       
 
             </Box>

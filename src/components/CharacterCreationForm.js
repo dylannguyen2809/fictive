@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
 
@@ -11,6 +11,8 @@ const formContainerStyle = {
     width: '80%',
     // Add other styles as needed
   };
+
+
   
   
 const CharacterCreationForm = ({ handleSubmit }) => {
@@ -30,16 +32,28 @@ const CharacterCreationForm = ({ handleSubmit }) => {
     const handleThemeChange = (event) => setTheme(event.target.value);
     const handlePurposeChange = (event) => setPurpose(event.target.value);
 
-    // Handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Pass state variables back to parent component
-        onSubmit({ name, gender, character, language, theme, purpose });
-    };
     
+    const handleFormSubmission = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        // Collect form data
+        const formData = {
+            name,
+            gender,
+            character,
+            language,
+            theme,
+            purpose
+        };
+
+        // Call the handleSubmit prop with formData
+        handleSubmit(formData);
+    };
+
+
   return (
     <div style={formContainerStyle}>{
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleFormSubmission}>
       <TextField
         autoFocus
         margin="dense"
@@ -48,15 +62,19 @@ const CharacterCreationForm = ({ handleSubmit }) => {
         type="text"
         fullWidth
         variant="outlined"
-      />
+        value={name}  // Bind value to state
+        onChange={handleNameChange}  // Set onChange handler
+    />
 
       <FormControl fullWidth margin="dense">
         <InputLabel id="kid-gender-label">Character's Gender</InputLabel>
         <Select
-          labelId="kid-gender-label"
-          id="kid-gender"
-          label="Character's Gender"
-          defaultValue=""
+            labelId="kid-gender-label"
+            id="kid-gender"
+            label="Character's Gender"
+            value={gender}  // Bind value to state
+            onChange={handleGenderChange}  // Set onChange handler
+            defaultValue=""
         >
           <MenuItem value=""><em>None</em></MenuItem>
           <MenuItem value={'male'}>Male</MenuItem>
