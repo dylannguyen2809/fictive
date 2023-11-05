@@ -58,8 +58,6 @@ function Home() {
     textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', // Text shadow for the fancy look
   };
 
-  // ...existing styles
-
   return (
     <ThemeProvider theme={theme}>
       <Header />
@@ -76,19 +74,21 @@ function Home() {
           width: '100%',
         }}
       >
-        <div><Typography variant="h1" style={welcomeStyle}>
-          Welcome to Fictive!
-        </Typography></div>
+        <div>
+          <Typography variant="h1" style={welcomeStyle}>
+            Welcome to Fictive!
+          </Typography>
+        </div>
         <br /> {/* Add a line break */}
         <Box
           style={{
             display: 'flex',
+            flexDirection: 'column', // Stack the elements vertically
             alignItems: 'center',
-            justifyContent: 'space-between',
             padding: '20px',
             margin: 'auto',
             width: '80%',
-            color: theme.palette.secondary.main, // Use the secondary color from the theme
+            color: theme.palette.secondary.main,
           }}
         >
           <Box
@@ -97,35 +97,24 @@ function Home() {
               padding: '20px',
               borderRadius: '10px',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              width: '60%',
+              width: '100%', // Take the full width
+              marginBottom: '20px', // Add space below the text box
             }}
           >
             <Typography variant="body1" style={paragraphStyle}>
               Dive into the realm of AI-driven creativity with Fictive, where your words shape the canvas. Fictive harnesses the transformative power of OpenAI's DALL-E to bring your imagination to life in vivid imagery. Our sleek interface is built for accessibility, allowing you to effortlessly translate ideas into art. Revel in the magic of machine learning and neural networks as they render your prompts into stunning, high-resolution visuals. At Fictive, we celebrate the fusion of human creativity and AI innovation, delivering a seamless experience for both visionaries and visual storytellers. Begin your creative exploration with Fictive, where every prompt is a portal to new possibilities.
             </Typography>
           </Box>
-          <Box>
-            <Button
-              component={Link}
-              to="/story"
-              variant="contained"
-              color="primary"
-              size="large"
-              style={{ fontSize: '1.5rem', margin: '10px', display: 'block' }}
-            >
-              Story
-            </Button>
-            <Button
-              component={Link}
-              to="/character-creation"
-              variant="contained"
-              color="secondary"
-              size="large"
-              style={{ fontSize: '1.5rem', margin: '10px', display: 'block' }}
-            >
-              Character Creation
-            </Button>
-          </Box>
+          <Button
+            component={Link}
+            to="/character-creation"
+            variant="contained"
+            color="secondary"
+            size="large"
+            style={{ fontSize: '1.5rem', width: '100%', maxWidth: '400px' }}
+          >
+            Begin your Story!
+          </Button>
         </Box>
       </Box>
     </ThemeProvider>

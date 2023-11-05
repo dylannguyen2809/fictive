@@ -177,6 +177,9 @@ const CharacterCreationForm = ({ handleSubmit , created }) => {
             <MenuItem value={'romance'} style={{ color: 'white' }}>Romance</MenuItem>
             <MenuItem value={'horror'} style={{ color: 'white' }}>Horror</MenuItem>
             <MenuItem value={'mystery'} style={{ color: 'white' }}>Mystery</MenuItem>
+            <MenuItem value={'history'} style={{ color: 'white' }}>History</MenuItem>
+            <MenuItem value={'anime'} style={{ color: 'white' }}>Anime</MenuItem>
+            <MenuItem value={'realistic'} style={{ color: 'white' }}>Real Life</MenuItem>
             {/* ... other themes */}
         </Select>
         </FormControl>

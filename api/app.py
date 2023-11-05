@@ -34,7 +34,7 @@ def start_adventure():
     # The first message to the model setting up the context
     system_message = {
         "role": "system",
-    "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End.' Use 100 words or less per chapter."
+    "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End.' Use 150-200 words per chapter."
     }
 
     # The user message with the initial story setup
@@ -71,7 +71,7 @@ def continue_adventure():
     # Send the full chat log along with the new user message to GPT
     response = openai.ChatCompletion.create(
         model="gpt-4",  # make sure to use "gpt-4" if that's what you've been using
-        messages=[{"role": "system", "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End.' Use 100 words or less per chapter."}, {"role": "user", "content": chat_log}, user_message]
+        messages=[{"role": "system", "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End.' Use 150-200 words per chapter."}, {"role": "user", "content": chat_log}, user_message]
     )
 
     # Append the new content to the chat log in the session
@@ -95,7 +95,7 @@ def end_adventure():
     # Send the epilogue command to GPT along with the chat log for context
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=[{"role": "system", "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline followed by the story text. Use 100 words or less per chapter."}, {"role": "user", "content": chat_log}, user_message]
+        messages=[{"role": "system", "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline followed by the story text. Use 150-200 words per chapter."}, {"role": "user", "content": chat_log}, user_message]
     )
 
     # Append the epilogue to the chat log in the session
