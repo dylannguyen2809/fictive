@@ -1,75 +1,74 @@
-1. description/intro to app
-2. images/video demo
-3. how to run (after git clone, how to run locally)
-   
-5.
-6. # Getting Started with Create React App
+# Fictive: Choose Your Own Adventure App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Fictive Logo](path/to/logo.png)
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+In the age of digital storytelling, children's literature needs to evolve. We noticed a gap in the market for interactive, personalized children's stories that leverage AI for a unique experience. Identifying key areas for improvement:
 
-### `npm start`
+- **Static Storylines:** Traditional books offer no interactivity, which is less engaging for the digital-savvy young generation.
+- **One-Size-Fits-All:** Most stories are not tailored to individual preferences or developmental stages.
+- **Lack of Visual Customization:** Visual elements in existing children's books cannot be altered to match the child's imagination or visual preferences.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Interactive Story Sample](path/to/story_sample.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> Insert a brief video walkthrough or image gallery showcasing the app here
 
-### `npm test`
+## What It Does
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+"Fictive" is a groundbreaking choose-your-own-adventure app that addresses these challenges head-on. It allows for a high degree of personalization in story creation, thanks to the integration of advanced AI models like DALL-E and GPT-4. Here's what it offers:
 
-### `npm run build`
+1. **Interactive Storytelling:** Children or parents can make choices that influence the story's direction.
+2. **AI-Generated Content:** Our app uses AI to craft stories that adapt to a child's interests and developmental needs.
+3. **Visual and Textual Customization:** Users can select illustrations, backgrounds, and animations to visually enrich the storytelling experience.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run Fictive on your local machine, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Git
+- Node.js
+- npm (comes with Node.js)
+- Python
+- Flask
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+First, clone the repository:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/your-username/fictive.git
+cd fictive
+'''
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To set up the frontend, run:
+```bash
+# Navigate to the frontend directory
+cd frontend
 
-## Learn More
+# Install dependencies
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Start the React app
+npm start
+'''
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Open a new terminal window for the backend setup:
 
-### Code Splitting
+```bash
+# Navigate to the backend directory
+cd backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Install Flask (if you don't have it already)
+pip install Flask
 
-### Analyzing the Bundle Size
+# Run the Flask server
+python run flask
+'''
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The app should now be running on localhost in your web browser.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For any additional help or to report issues, please open an issue in the GitHub repository.
+Happy storytelling with Fictive!
