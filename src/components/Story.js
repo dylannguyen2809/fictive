@@ -7,8 +7,6 @@ import Chapter from './Chapter';
 
 function Story() {
     const [currentTime, setCurrentTime] = useState('');
-    const [chapterName, setChapterName] = useState('Chapter 1: A New Discovery');
-
     const [chapters, setChapters] = useState([
       {
         chapterName: "Chapter 1: A New Discovery",
@@ -87,7 +85,6 @@ function Story() {
       currentChapter={data.currentChapter}
       selectedChoice={data.selectedChoice}
     />);
-
 
     return (
       <div className="Story">
