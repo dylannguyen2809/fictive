@@ -41,7 +41,7 @@ First, clone the repository:
 ```bash
 git clone https://github.com/your-username/fictive.git
 cd fictive
-'''
+```
 
 To set up the frontend, run:
 ```bash
@@ -53,7 +53,7 @@ npm install
 
 # Start the React app
 npm start
-'''
+```
 
 Open a new terminal window for the backend setup:
 
@@ -66,7 +66,7 @@ pip install Flask
 
 # Run the Flask server
 python run flask
-'''
+```
 
 The app should now be running on localhost in your web browser.
 
