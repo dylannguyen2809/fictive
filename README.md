@@ -61,7 +61,7 @@ cd frontend
 npm install
 
 # Start the React app
-npm start
+npm run start
 ```
 
 Open a new terminal window for the backend setup:
@@ -74,7 +74,7 @@ cd backend
 pip install Flask
 
 # Run the Flask server
-python run flask
+python run app.py
 ```
 
 The app should now be running on localhost in your web browser.
