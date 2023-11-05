@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+1. description/intro to app
+2. images/video demo
+3. how to run (after git clone, how to run locally)
+   
+5.
+6. # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
