@@ -1,6 +1,6 @@
 # Fictive: Choose Your Own Adventure App
 
-![Fictive Logo](path/to/logo.png)
+![Fictive Home Page](./media/landing.png)
 
 ## Inspiration
 
@@ -10,7 +10,7 @@ In the age of digital storytelling, children's literature needs to evolve. We no
 - **One-Size-Fits-All:** Most stories are not tailored to individual preferences or developmental stages.
 - **Lack of Visual Customization:** Visual elements in existing children's books cannot be altered to match the child's imagination or visual preferences.
 
-![Interactive Story Sample](path/to/story_sample.png)
+![Interactive Story Sample](./media/charactercreation.png)
 
 > Insert a brief video walkthrough or image gallery showcasing the app here
 
@@ -22,6 +22,9 @@ In the age of digital storytelling, children's literature needs to evolve. We no
 2. **AI-Generated Content:** Our app uses AI to craft stories that adapt to a child's interests and developmental needs.
 3. **Visual and Textual Customization:** Users can select illustrations, backgrounds, and animations to visually enrich the storytelling experience.
 
+![Interactive Story Sample](./media/generatedstory.png)
+![Interactive Story Sample](./media/storyprogression.png)
+![Interactive Story Sample](./media/ending.png)
 ## Getting Started
 
 To run Fictive on your local machine, follow these steps:
