@@ -86,7 +86,6 @@ function Story() {
       selectedChoice={data.selectedChoice}
     />);
 
-
     return (
       <div className="Story">
         <ThemeProvider theme={theme}>
