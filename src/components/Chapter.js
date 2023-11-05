@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     width: '100%', // Set the width to make it wider
     maxHeight: '500px', // Limit the height
-    overflow: 'hidden', // Hide overflowing content
     borderRadius: '10px', // Add rounded corners to the image container
+    overflow: 'hidden', // Hide overflowing content
   },
   image: {
     width: '100%',
@@ -36,9 +36,11 @@ const useStyles = makeStyles((theme) => ({
   },
   imageText: {
     position: 'absolute',
-    top: '70%', // Vertically center the text
+    height: '80%',
+    top: '80%', // Vertically center the text
     left: '50%', // Horizontally center the text
     transform: 'translate(-50%, -50%)',
+    overflow: 'scroll', // Hide overflowing content
     color: 'white',
     padding: theme.spacing(1),
     textAlign: 'center',
@@ -67,12 +69,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button1: {
-    backgroundImage: 'url("/default1.png")', // Replace with the button 1 image URL
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
   button2: {
-    backgroundImage: 'url("/default2.png")', // Replace with the button 2 image URL
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -107,27 +107,27 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     width: '100%',
+    paddingTop: '30px',
   },
 }));
 
 function Chapter(props) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <div className={classes.imageContainer}>
         <img
-          src="/defaultmain.png" // Replace with the image URL
+          src={props.chapterImg} // Replace with the image URL
           alt="Sample Image"
           className={classes.image}
         />
         <div className={classes.chapterText}><Typography variant="h4">{props.chapterName}</Typography></div>
         <div className={classes.imageText}>
           {props.currentChapter && 
-            <Typography variant="h6">
+            <Typography variant="h6" style={{fontSize: '22px'}}>
               <Typed
                   strings={[props.chapterContent]}
-                  typeSpeed={40}
+                  typeSpeed={10}
                   showCursor={false}
               />
             </Typography>
@@ -143,46 +143,65 @@ function Chapter(props) {
       <>
         <div>
           <Typography variant="h4" className={classes.selectedChoiceText}>
-          You selected: {props.selectedChoice}
+          {props.selectedChoice}
           </Typography>
         </div>
       </>}
-      {props.currentChapter && //CURRENT CHAPTER
-        <><div className={classes.buttonContainer}>
+      {props.currentChapter && (
+      <>
+        <div className={classes.buttonContainer}>
           <Button
             variant="contained"
             className={`${classes.squareButton} ${classes.button1}`}
+            style={{ backgroundImage: 'url("' + props.choice1Img + '")' }}
+            value={props.choice1}
+            onClick={(e) => props.handleSelectionText(props.choice1)}
           >
             <Typography variant="h5">{props.choice1}</Typography>
           </Button>
           <Button
             variant="contained"
             className={`${classes.squareButton} ${classes.button2}`}
+            style={{ backgroundImage: 'url("' + props.choice2Img + '")' }}
+            value={props.choice2}
+            onClick={(e) => props.handleSelectionText(props.choice2)}
           >
             <Typography variant="h5">{props.choice2}</Typography>
           </Button>
-        </div><Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
-            <Card className={classes.cardBackground}>
-              <CardContent className={classes.cardBackground}>
-                <Typography variant="h6" gutterBottom>
-                  🪶 MAKE YOUR OWN CHOICE!
-                </Typography>
-                <Box display="flex">
-                  <TextField
-                    className={classes.textField}
-                    label="Input Text"
-                    variant="outlined" />
-                  <Button
-                    variant="contained"
-                    className={classes.submitButton}
-                  >
-                    CONTINUE...
-                  </Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </Container></>
-      }
+        </div>
+        <Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
+          <Card className={classes.cardBackground}>
+            <CardContent className={classes.cardBackground}>
+              <Typography variant="h6" gutterBottom>
+                🪶 MAKE YOUR OWN CHOICE!
+              </Typography>
+              <Box display="flex">
+                <TextField
+                  className={classes.textField}
+                  label="Input Text"
+                  variant="outlined"
+                  onChange={(e) => props.handleSelectionText(e.target.value)}
+                />
+                <Button
+                  variant="contained"
+                  className={classes.submitButton}
+                  onClick={props.handleContinue}
+                >
+                  CONTINUE...
+                </Button>
+                <Button
+                  variant="contained"
+                  className={classes.submitButton}
+                  onClick={props.handleEnd}
+                >
+                  END
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Container>
+      </>
+    )}
     </div>
   );
 }
