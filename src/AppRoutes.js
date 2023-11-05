@@ -5,7 +5,9 @@ import Home from './components/Home';
 import Story from './components/Story';
 import CharacterCreation from './components/CharacterCreation'
 
+
 function AppRoutes() {
+  
   return (
     <Router> {/* Wrap your routes in a Router component */}
       <Routes>

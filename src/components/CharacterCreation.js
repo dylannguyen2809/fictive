@@ -18,7 +18,7 @@ function CharacterCreation() {
 
 
     const handleSubmit = (formData) => {
-        console.log('Form Data:', formData);
+        console.log('Form Data:', formData); 
         handleClose();
     };
 
