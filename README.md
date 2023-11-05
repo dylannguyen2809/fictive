@@ -22,9 +22,15 @@ In the age of digital storytelling, children's literature needs to evolve. We no
 2. **AI-Generated Content:** Our app uses AI to craft stories that adapt to a child's interests and developmental needs.
 3. **Visual and Textual Customization:** Users can select illustrations, backgrounds, and animations to visually enrich the storytelling experience.
 
-![Interactive Story Sample](./media/generatedstory.png)
-![Interactive Story Sample](./media/storyprogression.png)
-![Interactive Story Sample](./media/ending.png)
+<p float="left">
+  <img src="./media/generatedstory.png" width="32%" />
+  <img src="./media/storyprogression.png" width="32%" /> 
+  <img src="./media/ending.png" width="32%" />
+</p>
+
+Click on the image to view the video:
+[![Fictive Demo](http://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/WJGW4LrhAOw")
+
 ## Getting Started
 
 To run Fictive on your local machine, follow these steps:
