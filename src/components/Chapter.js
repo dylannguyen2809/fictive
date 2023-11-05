@@ -3,6 +3,8 @@ import { makeStyles } from '@mui/styles';
 import { Card, CardContent, Typography, Button, Container, TextField, Box } from '@mui/material';
 import { createTheme } from '@mui/material/styles'; // Import createTheme
 import Typed from 'react-typed';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   imageContainer: {
     position: 'relative',
     width: '100%', // Set the width to make it wider
-    maxHeight: '500px', // Limit the height
+    height: '500px', // Limit the height
     borderRadius: '10px', // Add rounded corners to the image container
     overflow: 'hidden', // Hide overflowing content
   },
@@ -68,6 +70,10 @@ const useStyles = makeStyles((theme) => ({
       outline: '2px solid gold', // Outline the button on focus
     },
   },
+  squareLoading: {
+    width: 'calc(50% - 8px)', // To fit two buttons side-by-side with spacing
+    height: '300px', // Set the height of the buttons
+  },
   button1: {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -113,6 +119,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Chapter(props) {
   const classes = useStyles();
+
+  // Add a loading state to manage when to show the loading animation
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleLoading = () => {
+    setIsLoading(true);
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.imageContainer}>
@@ -139,69 +153,105 @@ function Chapter(props) {
           }
         </div>
       </div>
-      {!props.currentChapter && //OLD CHAPTER
-      <>
+      {!props.currentChapter && (
         <div>
           <Typography variant="h4" className={classes.selectedChoiceText}>
-          {props.selectedChoice}
+            {props.selectedChoice}
           </Typography>
         </div>
-      </>}
+      )}
       {props.currentChapter && (
+        <>
+          <div className={classes.buttonContainer}>
+            <Button
+              variant="contained"
+              className={`${classes.squareButton} ${classes.button1}`}
+              style={{ backgroundImage: 'url("' + props.choice1Img + '")', backgroundColor: props.selectedChoice === props.choice1 ? 'rgba(0, 0, 0, 0.7)' : 'transparent' }}
+              value={props.choice1}
+              onClick={(e) => {
+                props.handleSelectionText(props.choice1);
+              }}
+              disabled={isLoading}
+            >
+              <Typography variant="h5">{props.choice1}</Typography>
+            </Button>
+            <Button
+              variant="contained"
+              className={`${classes.squareButton} ${classes.button2}`}
+              style={{ backgroundImage: 'url("' + props.choice2Img + '")', backgroundColor: props.selectedChoice === props.choice2 ? 'rgba(0, 0, 0, 0.7)' : 'transparent' }}
+              value={props.choice2}
+              onClick={(e) => {
+                props.handleSelectionText(props.choice2);
+              }}
+              disabled={isLoading}
+            >
+              <Typography variant="h5">{props.choice2}</Typography>
+            </Button>
+          </div>
+          <Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
+            <Card className={classes.cardBackground}>
+              <CardContent className={classes.cardBackground}>
+                <Typography variant="h6" gutterBottom>
+                  🪶 MAKE YOUR OWN CHOICE!
+                </Typography>
+                <Box display="flex">
+                  <TextField
+                    className={classes.textField}
+                    label="Input Text"
+                    variant="outlined"
+                    onChange={(e) => props.handleSelectionText(e.target.value)}
+                  />
+                  <Button
+                    variant="contained"
+                    className={classes.submitButton}
+                    onClick={() => {
+                      handleLoading();
+                      props.handleContinue();
+                    }}
+                    style={{ marginLeft: '20px' }}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Loading...' : 'CONTINUE...'}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className={classes.submitButton}
+                    onClick={() => {
+                      handleLoading();
+                      props.handleEnd();
+                    }}
+                    style={{ marginLeft: '20px', backgroundColor: '#499CA6' }}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Loading...' : 'END'}
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Container>
+        </>
+      )}
+      {isLoading && props.currentChapter && //LOADING POSITION
       <>
+        <div style={{width:'100%', marginTop: '30px'}}><Skeleton count={7} enableAnimation={true} baseColor={'#A68549'} highlightColor={'#C1A86F'}/></div>
         <div className={classes.buttonContainer}>
-          <Button
+          <div
             variant="contained"
-            className={`${classes.squareButton} ${classes.button1}`}
-            style={{ backgroundImage: 'url("' + props.choice1Img + '")' }}
-            value={props.choice1}
-            onClick={(e) => props.handleSelectionText(props.choice1)}
+            className={`${classes.squareLoading}`}
+            disabled={isLoading}
           >
-            <Typography variant="h5">{props.choice1}</Typography>
-          </Button>
-          <Button
+            <Skeleton Skeleton count={7} enableAnimation={true} baseColor={'#A68549'} highlightColor={'#C1A86F'}/>
+          </div>
+          <div
             variant="contained"
-            className={`${classes.squareButton} ${classes.button2}`}
-            style={{ backgroundImage: 'url("' + props.choice2Img + '")' }}
-            value={props.choice2}
-            onClick={(e) => props.handleSelectionText(props.choice2)}
+            className={`${classes.squareLoading}`}
+            disabled={isLoading}
           >
-            <Typography variant="h5">{props.choice2}</Typography>
-          </Button>
+            <Skeleton Skeleton count={7} enableAnimation={true} baseColor={'#A68549'} highlightColor={'#C1A86F'}/>
+          </div>
         </div>
-        <Container className={classes.textBoxContainer} disableGutters maxWidth={false}>
-          <Card className={classes.cardBackground}>
-            <CardContent className={classes.cardBackground}>
-              <Typography variant="h6" gutterBottom>
-                🪶 MAKE YOUR OWN CHOICE!
-              </Typography>
-              <Box display="flex">
-                <TextField
-                  className={classes.textField}
-                  label="Input Text"
-                  variant="outlined"
-                  onChange={(e) => props.handleSelectionText(e.target.value)}
-                />
-                <Button
-                  variant="contained"
-                  className={classes.submitButton}
-                  onClick={props.handleContinue}
-                >
-                  CONTINUE...
-                </Button>
-                <Button
-                  variant="contained"
-                  className={classes.submitButton}
-                  onClick={props.handleEnd}
-                >
-                  END
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Container>
       </>
-    )}
+      }
     </div>
   );
 }

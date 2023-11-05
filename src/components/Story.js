@@ -23,7 +23,7 @@ function Story(props) {
             fontFamily: 'Henny Penny, sans-serif', // Set the font-family for all text
             allVariants: {
                 color: 'white', // Set the text color to white for all typography variants
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', // Add a black text shadow
+                textShadow: '2px 2px 5px rgba(0, 0, 0, 1)', // Add a black text shadow
             },
         },
     }); // Create a theme instance
@@ -165,12 +165,12 @@ function Story(props) {
         var tmp = Array.from(chapters);
         const imURL = await getImage('epilogue', props.formData.theme);
     
-        tmp[tmp.length - 1] = {
-          chapterName: tmp[tmp.length - 1].chapterName,
-          chapterContent: tmp[tmp.length - 1].chapterContent,
-          choice1: tmp[tmp.length - 1].choice1,
-          choice2: tmp[tmp.length - 1].choice2,
-          chapterImg: '/defaultmain.png',
+        tmp[tmp.length-1] = {
+          chapterName: tmp[tmp.length-1].chapterName,
+          chapterContent: tmp[tmp.length-1].chapterContent,
+          choice1: tmp[tmp.length-1].choice1,
+          choice2: tmp[tmp.length-1].choice2,
+          chapterImg: tmp[tmp.length-1].chapterImg,
           choice1Img: '/default1.png',
           choice2Img: '/default2.png',
           selectedChoice: selection,

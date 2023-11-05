@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -23,7 +24,7 @@ function Header() {
   return (
     <AppBar position="sticky" className={classes.appBar}>
       <Toolbar>
-        <Typography variant="h4" className={classes.title} style={{ fontFamily: 'Fondamento, cursive', padding: '8px' }}>
+        <Typography variant="h4" component={Link} to="/" className={classes.title} style={{ fontFamily: 'Fondamento, cursive', padding: '8px', textDecoration: 'none'}}>
           fictive
         </Typography>
       </Toolbar>

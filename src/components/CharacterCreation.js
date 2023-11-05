@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './Header';
 import Box from '@mui/material/Box';
-
 import CharacterCreationForm from './CharacterCreationForm';
 import Story from './Story'; // Import the Story component
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function CharacterCreation() {
   const [open, setOpen] = useState(false);
@@ -68,6 +69,9 @@ function CharacterCreation() {
           {open && formData && (
             <Story formData={formData} handleClose={handleClose} />
           )}
+          {!open &&
+            <Skeleton Skeleton count={10} enableAnimation={true} baseColor={'#A68549'} highlightColor={'#C1A86F'}/>
+          }
         </Box>
       </ThemeProvider>
     </div>
