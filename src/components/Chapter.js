@@ -123,12 +123,20 @@ function Chapter(props) {
         />
         <div className={classes.chapterText}><Typography variant="h4">{props.chapterName}</Typography></div>
         <div className={classes.imageText}>
-          <Typography variant="h6">
-            <Typed
-                strings={[props.chapterContent]}
-                typeSpeed={40}
-            />
-          </Typography>
+          {props.currentChapter && 
+            <Typography variant="h6">
+              <Typed
+                  strings={[props.chapterContent]}
+                  typeSpeed={40}
+                  showCursor={false}
+              />
+            </Typography>
+          }
+          {!props.currentChapter && 
+            <Typography variant="h6">
+              {props.chapterContent}
+            </Typography>
+          }
         </div>
       </div>
       {!props.currentChapter && //OLD CHAPTER

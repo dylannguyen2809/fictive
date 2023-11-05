@@ -8,11 +8,6 @@ import Chapter from './Chapter';
 function Story() {
     const [currentTime, setCurrentTime] = useState('');
     const [chapterName, setChapterName] = useState('Chapter 1: A New Discovery');
-    const [chapterContent, setChapterContent] = useState("One sunny afternoon, while he was exploring the attic of his grandmother's house, he stumbled upon an old, dusty book. As he opened it, a strange symbol caught his eye. Before he could react, the symbol glowed brightly and a shimmering portal appeared in front of him.");
-    const [choice1, setChoice1] = useState("Step through the portal and explore the unknown.");
-    const [choice2, setChoice2] = useState("Open the book to discover its secrets");
-    const [selectedChoice, setSelectedChoice] = useState("Step through the portal and explore the unknown.");
-    const [currentChapter, setCurrentChapter] = useState(false);
 
     const [chapters, setChapters] = useState([
       {
