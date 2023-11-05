@@ -3,78 +3,75 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './Header';
 import Box from '@mui/material/Box';
 
-import Form from './CharacterCreationForm';
+import CharacterCreationForm from './CharacterCreationForm';
+import Story from './Story'; // Import the Story component
 
 function CharacterCreation() {
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState(null); // State to store form data
 
-    const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
-    };
+  };
 
+  const handleSubmit = (formData) => {
+    // Set the form data to the state
+    setFormData(formData);
+    handleClickOpen(); // Open the Story component
+  };
 
-    const handleSubmit = (formData) => {
-        console.log('Form Data:', formData); 
-        handleClose();
-    };
-
-    const theme = createTheme({
-        palette: {
-            primary: {
-              main: '#176273', // Change the primary color
-            },
-            secondary: {
-              main: '#D4BF80', // Change the secondary color
-            },
-            lighttext: {
-                main: '#F2F3D4',
-            }
-          },
-        typography: {
-            fontFamily: 'Henny Penny, sans-serif', // Set the font-family for all text
-            allVariants: {
-                color: 'white', // Set the text color to white for all typography variants
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', // Add a black text shadow
-            },
+  const theme = createTheme({
+    palette: {
+        primary: {
+          main: '#176273', // Change the primary color
         },
-    }); // Create a theme instance
+        secondary: {
+          main: '#D4BF80', // Change the secondary color
+        },
+        lighttext: {
+            main: '#F2F3D4',
+        }
+      },
+    typography: {
+        fontFamily: 'Henny Penny, sans-serif', // Set the font-family for all text
+        allVariants: {
+            color: 'white', // Set the text color to white for all typography variants
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', // Add a black text shadow
+        },
+    },
+  }); // Create a theme instance
 
-    
-  
-    return (
-      <div className="Story">
-        <ThemeProvider theme={theme}>
-            <Header />
-            <Box
-                style={{
-                    background: `url('/background.jpeg')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundAttachment: 'fixed',
-                    minHeight: '100vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: '-1',
-                    width: '100%',
-                }}
-                >
-               
-
-               <Form handleSubmit={handleSubmit} />
-      
-
-            </Box>
-            
-
-        </ThemeProvider>
-      </div>
-    );
+  return (
+    <div className="CharacterCreation">
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Box
+          style={{
+            background: `url('/background.jpeg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: '-1',
+            width: '100%',
+          }}
+        >
+          <CharacterCreationForm handleSubmit={handleSubmit} created={open}/>
+          {open && formData && (
+            <Story formData={formData} handleClose={handleClose} />
+          )}
+        </Box>
+      </ThemeProvider>
+    </div>
+  );
 }
 
 export default CharacterCreation;

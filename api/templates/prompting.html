@@ -1,0 +1,31 @@
+<!-- templates/show_image.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Image</title>
+</head>
+<body>
+    <form action="{{ url_for("prompting")}}" method="post">
+        <style type="text/css"> 
+  
+            label { 
+              font: 18px; 
+            } 
+      
+            input { 
+              margin: 7px; 
+              padding: 2px 
+            } 
+        </style> 
+        <label for="story">Story idea:</label>
+        <input type="text" id="storyprompt" name="sprompt" style="width: 600px;">
+        <br>
+        <label for="charactername">Character Name:</label>
+        <input type="text" id="charactername" name="cname">
+        <br>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre">
+        <br>
+        <a href=testing><button type="submit">Submit</button></a>
+</body>
+</html>

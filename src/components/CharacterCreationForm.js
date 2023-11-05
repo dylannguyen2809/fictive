@@ -20,7 +20,7 @@ const formContainerStyle = {
 
   
   
-const CharacterCreationForm = ({ handleSubmit }) => {
+const CharacterCreationForm = ({ handleSubmit , created }) => {
     // State variables for each input
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
@@ -109,7 +109,9 @@ const CharacterCreationForm = ({ handleSubmit }) => {
         autoFocus
         margin="dense"
         id="kid-character"
-        label="Character's race (optional)"
+        label="Character description (optional)"
+        value={character}  // Bind value to state
+        onChange={handleCharacterChange}
         type="text"
         fullWidth
         variant="outlined"
@@ -121,6 +123,8 @@ const CharacterCreationForm = ({ handleSubmit }) => {
           labelId="story-language-label"
           id="story-language"
           label="Story language"
+          value={language}  // Bind value to state
+          onChange={handleLanguageChange}  // Set onChange handler
           defaultValue=""
           style={{ color: 'white' }} // Set text color of the select
         inputProps={{
@@ -154,6 +158,8 @@ const CharacterCreationForm = ({ handleSubmit }) => {
             inputProps={{
             style: { color: 'white' } // Set text color of the select input
             }}
+            value={theme}  // Bind value to state
+            onChange={handleThemeChange}  // Set onChange handler
             MenuProps={{
             PaperProps: {
                 style: {
@@ -168,6 +174,9 @@ const CharacterCreationForm = ({ handleSubmit }) => {
             <MenuItem value={'adventure'} style={{ color: 'white' }}>Adventure</MenuItem>
             <MenuItem value={'fantasy'} style={{ color: 'white' }}>Fantasy</MenuItem>
             <MenuItem value={'sci-fi'} style={{ color: 'white' }}>Science Fiction</MenuItem>
+            <MenuItem value={'romance'} style={{ color: 'white' }}>Romance</MenuItem>
+            <MenuItem value={'horror'} style={{ color: 'white' }}>Horror</MenuItem>
+            <MenuItem value={'mystery'} style={{ color: 'white' }}>Mystery</MenuItem>
             {/* ... other themes */}
         </Select>
         </FormControl>
@@ -186,11 +195,13 @@ const CharacterCreationForm = ({ handleSubmit }) => {
         type="text"
         fullWidth
         variant="outlined"
+        onChange={handlePurposeChange}  // Set onChange handler
       />
-
-      <Button type="submit" variant="contained" color="primary">
-        Create Character
-      </Button>
+      {!created && 
+        <Button type="submit" variant="contained" color="primary">
+          Create Character
+        </Button>
+      }
     </form>
     }</div>
   );
