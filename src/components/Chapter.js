@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   imageContainer: {
     position: 'relative',
     width: '100%', // Set the width to make it wider
-    height: '500px', // Limit the height
+    height: '1000px', // Limit the height
     borderRadius: '10px', // Add rounded corners to the image container
     overflow: 'hidden', // Hide overflowing content
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto', // Set height to 'auto' for aspect ratio preservation
     objectFit: 'cover',
     objectPosition: 'center top', // Position the center of the image
-    transform: 'translateY(-25%)',
+    //transform: 'translateY(-25%)',
   },
   chapterText: {
     position: 'absolute',
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   imageText: {
     position: 'absolute',
     height: '80%',
-    top: '80%', // Vertically center the text
+    top: '120%', // Vertically center the text
     left: '50%', // Horizontally center the text
     transform: 'translate(-50%, -50%)',
     overflow: 'scroll', // Hide overflowing content
@@ -138,7 +138,7 @@ function Chapter(props) {
         <div className={classes.chapterText}><Typography variant="h4">{props.chapterName}</Typography></div>
         <div className={classes.imageText}>
           {props.currentChapter && 
-            <Typography variant="h6" style={{fontSize: '22px'}}>
+            <Typography variant="h6" style={{fontSize: '20px'}}>
               <Typed
                   strings={[props.chapterContent]}
                   typeSpeed={10}
@@ -147,7 +147,7 @@ function Chapter(props) {
             </Typography>
           }
           {!props.currentChapter && 
-            <Typography variant="h6">
+            <Typography variant="h6" style={{fontSize: '20px'}}>
               {props.chapterContent}
             </Typography>
           }

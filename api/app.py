@@ -6,7 +6,8 @@ import openai
 from flask import Flask, request, jsonify, render_template, session
 from flask_cors import CORS
 
-app = Flask(__name__)
+#app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.secret_key = 'new'  # Replace with your actual secret key for session management
@@ -18,7 +19,8 @@ if not openai.api_key:
 @app.route('/')
 def index():
     session.pop('chat_log', None)  # Reset the chat session for the user
-    return render_template('index.html')
+    #return render_template('index.html')
+    return app.send_static_file('../index.html')
 
 @app.route('/start_adventure', methods=['POST'])
 def start_adventure():
@@ -34,13 +36,13 @@ def start_adventure():
     # The first message to the model setting up the context
     system_message = {
         "role": "system",
-    "content": "You are a helpful AI creating a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End.' Use 150-200 words per chapter."
+        "content": "You are a creative AI writing a story in the genre of {genre}, with the purpose of {purpose}. Please format your response with the chapter name, then newline followed by the story text. Then 'Choices:' followed by the list of choices. Make each choice starts with a digit followed by a period. End with 'End.' Use 150-200 words per chapter. Additionally, provide a detailed DALL-E prompt to accompany the story chapter that features the character. Write this prompt after 'End.', and use the heading 'DALL-E:'"
     }
 
     # The user message with the initial story setup
     user_message = {
         "role": "user",
-        "content": f"Start a story about a character named {name} whose gender is {gender} in the genre {genre}. They are {appearance}. Please create a story in the specified genre. Please format your response with the chapter name,  followed by the story text. Then 'Choices:' followed by the list of choices. End with 'End."
+        "content": f"Start a choose-your-own adventure story about a character named {name} whose gender is {gender} in the genre of {genre}. This character is {appearance}. Please create a story in the specified genre."
     }
 
     messages = [system_message, user_message]
@@ -120,24 +122,27 @@ def parse_story(text):
         story_part = story_part.replace('Story:', '')
 
     # Extract choices, general pattern assuming each choice starts with a digit followed by a period
-    choices = re.findall(r'\d+\.\s(.+?)(?=\d+\.|$)', text, re.DOTALL)
+    choices = re.findall(r'\d+\.\s(.+?)(?=\d+\.|$)', text[:text.find('End.')], re.DOTALL)
 
     # Clean the choices by removing any leading/trailing whitespace and newlines
     choices = [choice.strip().replace('\n', ' ') for choice in choices]
     choices = [choice.replace(' End.', '') for choice in choices]
 
+    dalle = text[text.find('DALL-E:'): ]
     
     diction = {
         'chapter': chapter_number_title,
         'story': story_part,
-        'choices': choices
+        'choices': choices,
+        'dalle': dalle
     }
     print(diction)
 
     return {
         'chapter': chapter_number_title,
         'story': story_part,
-        'choices': choices
+        'choices': choices,
+        'dalle': dalle
     }
 
 @app.route('/time')
@@ -171,8 +176,9 @@ def generate_image():
     try:
         # Call the OpenAI API to generate an image
         response = openai.Image.create(
+            model='dall-e-3',
             prompt=request_prompt,
-            n=3,
+            n=1,
             size="1024x1024"
         )
 

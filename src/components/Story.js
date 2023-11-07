@@ -6,6 +6,7 @@ import Chapter from './Chapter';
 function Story(props) {
     const [chapters, setChapters] = useState([]);
     const [selection, setSelection] = useState('');
+    const [loaded, setLoaded] = useState(false);
 
     const theme = createTheme({
         palette: {
@@ -47,7 +48,7 @@ function Story(props) {
           throw new Error(`Network response was not ok (status: ${response.status})`);
         }
   
-        const data = await response.json();
+        const data = response.json();
   
         return data.images;
       } catch (error) {
@@ -58,7 +59,7 @@ function Story(props) {
   
     const handleInit = async (data) => {
       try {
-        const imURL = await getImage(data.chapter, props.formData.theme);
+        const imURL = await getImage(data.dalle + props.formData.name + " is " + props.formData.character, props.formData.theme);
         if (imURL) {
           const newChapter = {
             chapterName: data.chapter,
@@ -66,8 +67,8 @@ function Story(props) {
             choice1: data.choices[0],
             choice2: data.choices[1],
             chapterImg: imURL[0],
-            choice1Img: imURL[1],
-            choice2Img: imURL[2],
+            choice1Img: '/default1.png',
+            choice2Img: '/default2.png',
             selectedChoice: null,
             currentChapter: true,
           };
@@ -105,7 +106,7 @@ function Story(props) {
         //SUCCESS - UPDATE STATE
         .then(async data => {
           var tmp =  Array.from(chapters);
-          const imURL = await getImage(data.chapter, props.formData.theme);
+          const imURL = await getImage(data.dalle + props.formData.name + " is " + props.formData.character, props.formData.theme);
           console.log(tmp)
           //set current last element to have current selection value
           tmp[tmp.length-1] = {
@@ -126,8 +127,10 @@ function Story(props) {
             choice1: data.choices[0],
             choice2: data.choices[1],
             chapterImg: imURL[0],
-            choice1Img: imURL[1],
-            choice2Img: imURL[2],
+            choice1Img: '/default1.png',
+            choice2Img: '/default2.png',
+            //choice1Img: imURL[1],
+            //choice2Img: imURL[2],
             selectedChoice: null,
             currentChapter: true,
           })
@@ -163,7 +166,7 @@ function Story(props) {
         const data = await response.json();
     
         var tmp = Array.from(chapters);
-        const imURL = await getImage('epilogue', props.formData.theme);
+        const imURL = await getImage(data.dalle + props.formData.name + " is " + props.formData.character, props.formData.theme);
     
         tmp[tmp.length-1] = {
           chapterName: tmp[tmp.length-1].chapterName,
@@ -173,7 +176,7 @@ function Story(props) {
           chapterImg: tmp[tmp.length-1].chapterImg,
           choice1Img: '/default1.png',
           choice2Img: '/default2.png',
-          selectedChoice: selection,
+          selectedChoice: 'Conclude the story.',
           currentChapter: false,
         };
     
@@ -223,7 +226,22 @@ function Story(props) {
         }
         return response.json();// parses JSON response into native JavaScript objects
       })
-      .then(data => handleInit(data))
+      .then(async data => {
+        const imURL = await getImage(data.dalle + props.formData.name + " is " + props.formData.character, props.formData.theme);
+        if (imURL) {
+          const newChapter = {
+            chapterName: data.chapter,
+            chapterContent: data.story,
+            choice1: data.choices[0],
+            choice2: data.choices[1],
+            chapterImg: imURL[0],
+            choice1Img: '/default1.png',
+            choice2Img: '/default2.png',
+            selectedChoice: null,
+            currentChapter: true,
+          };
+          setChapters([newChapter]);
+      }})
       .catch(error => {
         console.error('Error fetching data:', error);
         if (error.response) {
@@ -232,7 +250,7 @@ function Story(props) {
           });
       }
       });
-    }, []);
+    }, [loaded]);
   
     const chapterArr = chapters.map((data) => 
     <Chapter
