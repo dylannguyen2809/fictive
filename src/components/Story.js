@@ -48,7 +48,7 @@ function Story(props) {
           throw new Error(`Network response was not ok (status: ${response.status})`);
         }
   
-        const data = response.json();
+        const data = await response.json();
   
         return data.images;
       } catch (error) {
